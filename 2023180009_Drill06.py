@@ -38,24 +38,29 @@ while running:
     dir_x = curserX - x
     dir_y = curserY - y
     clear_canvas()
-    if curserX> x:
+    if curserX>= x:
         dir = 1
     elif curserX < x :
         dir = -1
-    if curserY > y:
+    if curserY >= y:
         dir2 = 1
-    elif curserY <y:
+    elif curserY < y:
         dir2 = -1
 
     TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
     curser.draw(curserX, curserY)
     if arrive == False:
-        character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+        if dir ==1:
+            character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y, 100, 100)
+        else:
+            character.clip_composite_draw(frame * 100, 100 * 1, 100, 100,0, 'h',x,y, 100, 100)
     elif arrive == True:
         make_random()
+        arrive = False
     update_canvas()
     frame = (frame + 1) % 8
-    if dir_x !=0 or dir_y != 0:
+
+    if abs(dir_x) > 5 or abs(dir_y) > 5:
         x += dir * 5
         y += dir2 * 5
     else:
