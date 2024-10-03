@@ -1,3 +1,4 @@
+import random
 from pico2d import *
 
 TUK_WIDTH, TUK_HEIGHT = 1280, 1024
@@ -5,7 +6,7 @@ open_canvas(TUK_WIDTH, TUK_HEIGHT)
 
 TUK_ground = load_image('TUK_GROUND.png')
 character = load_image('animation_sheet.png')
-curser = load_image('hand arrow')
+curser = load_image('hand_arrow.png')
 
 
 def handle_events():
@@ -21,10 +22,17 @@ def handle_events():
             running = False
     pass
 
-
+def move_character(x, y, targetX, targetY):
+    x_distance = targetX-x
+    y_distance = targetY-y
+    a = y_distance / x_distance
+    b = y -x*a
 
 running = True
+arrive = True
+
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
+curserX, curserY =  random.randint(1, TUK_WIDTH), random.randint(1, TUK_HEIGHT)
 frame = 0
 hide_cursor()
 
@@ -34,6 +42,7 @@ while running:
     character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
     update_canvas()
     frame = (frame + 1) % 8
+    delay(0.05)
 
     handle_events()
 
