@@ -31,7 +31,6 @@ curserX, curserY = random.randint(0, TUK_WIDTH), random.randint(0, TUK_HEIGHT)
 frame = 0
 dir = 0
 dir2 = 0
-
 arrive = False
 
 while running:
